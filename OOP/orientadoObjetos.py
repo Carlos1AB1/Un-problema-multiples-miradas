@@ -1,36 +1,25 @@
-class ToDoList:
-    def __init__(self):
-        # La lista donde guardaremos las tareas (solo texto)
-        self.tareas = []
+# --- Paradigma OOP ---
+class GestorTareas:
+    def __init__(self):   # ✅ constructor con doble guion bajo
+        self.tareas = []  # Inicializamos la lista vacía de tareas
 
-    def agregar(self, texto):
-        # Agrega una nueva tarea al final de la lista
-        self.tareas.append(texto)
+    def agregar(self, tarea):
+        self.tareas.append(tarea)  # Agrega la tarea a la lista
 
     def mostrar(self):
-        # Si no hay tareas, avisamos
-        if not self.tareas:
-            print("No hay tareas.")
-        else:
-            # Enumeramos desde 1 (más natural que empezar en 0)
-            for i, t in enumerate(self.tareas, start=1):
-                print(f"{i}. {t}")
+        for i, t in enumerate(self.tareas, 1):
+            print(f"{i}. {t}")  # Muestra las tareas numeradas desde 1
 
-    def eliminar(self, numero):
-        # Ajustamos el número ingresado (el usuario pone 1,2,3... pero
-        # las listas en Python empiezan en índice 0)
-        indice = numero - 1
-        # Comprobamos si el índice es válido
+    def eliminar(self, indice):
         if 0 <= indice < len(self.tareas):
-            self.tareas.pop(indice)  # Quitamos la tarea de la lista
-        else:
-            print("Número inválido.")  # Si no existe, avisamos
+            self.tareas.pop(indice)  # Elimina la tarea en la posición indicada
 
-
-# --- Ejemplo de uso ---
-todo = ToDoList()          # Creamos la lista de tareas
-todo.agregar("Estudiar Python")   # Agregamos una tarea
-todo.agregar("Hacer ejercicio")   # Otra tarea
-todo.mostrar()              # Mostramos todas las tareas
-todo.eliminar(1)            # Eliminamos la primera tarea (Estudiar Python)
-todo.mostrar()              # Mostramos la lista actualizada
+# Uso:
+gestor = GestorTareas()
+gestor.agregar("Leer un libro")
+gestor.agregar("Practicar Python")
+gestor.agregar("Practicar OCL")
+gestor.mostrar()
+gestor.eliminar(2)  # Elimina la tercera tarea (índice 2)
+gestor.mostrar()
+# --- Paradigma OOP ---
