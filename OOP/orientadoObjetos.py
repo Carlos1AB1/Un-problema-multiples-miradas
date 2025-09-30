@@ -1,36 +1,36 @@
-# Ejemplo básico de Programación Orientada a Objetos en Python
+class ToDoList:
+    def __init__(self):
+        # La lista donde guardaremos las tareas (solo texto)
+        self.tareas = []
 
-class Persona:
-    def __init__(self, nombre, edad):
-        self.nombre = nombre
-        self.edad = edad
+    def agregar(self, texto):
+        # Agrega una nueva tarea al final de la lista
+        self.tareas.append(texto)
 
-    def saludar(self):
-        return f"Hola, mi nombre es {self.nombre} y tengo {self.edad} años."
+    def mostrar(self):
+        # Si no hay tareas, avisamos
+        if not self.tareas:
+            print("No hay tareas.")
+        else:
+            # Enumeramos desde 1 (más natural que empezar en 0)
+            for i, t in enumerate(self.tareas, start=1):
+                print(f"{i}. {t}")
 
-# Herencia
-class Estudiante(Persona):
-    def __init__(self, nombre, edad, universidad):
-        super().__init__(nombre, edad)
-        self.universidad = universidad
+    def eliminar(self, numero):
+        # Ajustamos el número ingresado (el usuario pone 1,2,3... pero
+        # las listas en Python empiezan en índice 0)
+        indice = numero - 1
+        # Comprobamos si el índice es válido
+        if 0 <= indice < len(self.tareas):
+            self.tareas.pop(indice)  # Quitamos la tarea de la lista
+        else:
+            print("Número inválido.")  # Si no existe, avisamos
 
-    def saludar(self):
-        return f"Hola, soy {self.nombre}, estudio en {self.universidad}."
 
-# Polimorfismo
-class Profesor(Persona):
-    def __init__(self, nombre, edad, materia):
-        super().__init__(nombre, edad)
-        self.materia = materia
-
-    def saludar(self):
-        return f"Hola, soy el profesor {self.nombre} y enseño {self.materia}."
-
-# Uso de las clases
-persona = Persona("Juan", 30)
-estudiante = Estudiante("Ana", 20, "Universidad Nacional")
-profesor = Profesor("Carlos", 45, "Matemáticas")
-
-print(persona.saludar())
-print(estudiante.saludar())
-print(profesor.saludar())
+# --- Ejemplo de uso ---
+todo = ToDoList()          # Creamos la lista de tareas
+todo.agregar("Estudiar Python")   # Agregamos una tarea
+todo.agregar("Hacer ejercicio")   # Otra tarea
+todo.mostrar()              # Mostramos todas las tareas
+todo.eliminar(1)            # Eliminamos la primera tarea (Estudiar Python)
+todo.mostrar()              # Mostramos la lista actualizada
